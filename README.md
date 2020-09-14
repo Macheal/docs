@@ -19,10 +19,10 @@ Open a PR and start hacking away at the docs.
 
 Things that need to be documented for v3
 
-- [ ] What is Micro
-- [ ] What problem is Micro solving
+- [x] FAQ: What is Micro
+- [x] FAQ: What problem is Micro solving
+- [x] FAQ: What environments does Micro run in
 - [ ] What is Micro's architecture
-- [ ] What environments does Micro run in
 - [ ] FAQ
 - [ ] Concepts
 - [ ] How-tos
