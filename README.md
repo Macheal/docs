@@ -22,12 +22,12 @@ Things that need to be documented for v3
 - [x] FAQ: What is Micro
 - [x] FAQ: What problem is Micro solving
 - [x] FAQ: What environments does Micro run in
+- [x] Getting Started: Installation
 - [ ] What is Micro's architecture
 - [ ] FAQ
 - [ ] Concepts
 - [ ] How-tos
 - [ ] Best practices
-- [ ] Installation
 - [ ] Service Library
 - [ ] Getting Started
 - [ ] Writing a service
