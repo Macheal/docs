@@ -11,114 +11,57 @@ The FAQ should provide quick answers to the most common questions.
 
 ## What is Micro?
 
-Micro empowers developers to build, share and collaborate on distributed systems aka microservices.
+Micro is a framework for cloud native development. It addresses the key concerns for distributed systems and defines them as a set of 
+services which act as the logical building blocks for microservices development.
 
-- Micro is a [Framework](https://github.com/micro/go-micro)
-- Micro is a [Runtime](https://github.com/micro/micro)
-- Micro is a [Network](https://micro/docs/network.html)
-- Micro is a [Community](https://slack.m3o.com/)
-
-### Open Source
-
-Micro is built as open source libraries and tools to help with microservice development.
-
-- **Framework** - A Go framework for writing microservices; service discovery, rpc, pub/sub, etc.
-- **Runtime** - A microservice runtime environment; API gateway, cli, slackbot, service proxy, etc.
-- **Plugins** - Plugins for the framework and runtime including etcd, kubernetes, nats, grpc, etc.
-
-Find all the tools at [github.com/micro](https://github.com/micro).
-
-### Network
-
-Micro provides an open global always-on cloud environment for sharing and running services. The [network](https://micro.mu/docs/network.html) 
-can be joined and used by anyone. It's a great way to unlock public collaboration outside of any one organisation or team.
-
-Explore the [network](https://micro.mu/docs/network.html).
-
-### Community
+## Where is the community?
 
 There's a slack community with thousands of members. 
 
-Invite yourself at [micro.mu/slack/](https://slack.m3o.com/).
+Invite yourself at [slack.m3o.com](https://slack.m3o.com/).
 
 ## Where do I start?
 
-Start with [go-micro](https://github.com/micro/go-micro). The readme provides a sample microservice.
+Start with the [getting started](getting-started) guide.
 
-Learn more by reading the [getting started](https://micro.mu/docs/writing-a-go-service.html) guide or checkout the [examples](https://github.com/micro/examples).
-
-Use the [micro](https://github.com/micro/micro) toolkit to access microservices via the cli, web ui, slack or api gateway.
+Browse through other directories for more info, join the slack to chat and look to [m3o.com](https://m3o.com) for a hosted offering.
 
 ## Who's using Micro?
 
-See the [users](https://micro.mu/docs/users.html) page with a list of companies using Micro (but note it may be out of date). 
+See the [users](users) with a list of companies using Micro. 
 
 Many more are also using it but not yet publicly listed. Feel free to add your company if you're using Micro.
 
-## How do I use Micro?
+## What do I use Micro for?
 
-It's quite simple.
+Use micro to build microservices. If you need to build Go based microservices in the Cloud then micro is the framework to start with.
 
-1. Write services using [go-micro](https://github.com/micro/go-micro).
-2. Access them via the [micro](https://github.com/micro/micro) toolkit.
-3. Profit.
+## Where can I find examples?
 
-Checkout the full [greeter](https://github.com/micro/examples/tree/master/greeter) example.
+Look at [github.com/micro/services](https://github.com/micro/services) for example services.
 
-## Zero Dependency Discovery
+## What is local vs platform?
 
-Multicast DNS is a built in registry for a zero conf service discovery.
+Micro supports Environments as a concept. An `env` is a micro server hosted somewhere either locally or elsewhere. It's defined 
+as a name mapping to a host:port pointing to the micro proxy (gRPC proxy). We bake in two envs known as "local" and "platform". 
 
-You don't need to do anything! It's just built in and enabled by default.
-
-## Can I use something instead of MDNS?
-
-Yes! The registry for service discovery is completely pluggable. Etcd is also included as a default plugin.
-
-```shell
-MICRO_REGISTRY=etcd MICRO_REGISTRY_ADDRESS=127.0.0.1:2379 myservice
-```
+Local is your local server started with `micro server` and with the proxy on port :8081. Platform is an environment we're hosted 
+in the cloud as a paid offering and ideally the place you'll run your code if you need hosting.
 
 ## Where can I run Micro?
 
-Micro is runtime agnostic. You can run it anywhere you like. On bare metal, on AWS, Google Cloud. On your favourite container orchestration system like Mesos or Kubernetes.
+Micro is runtime agnostic. You can run it anywhere you like. On bare metal, on AWS, Google Cloud. On your favourite container orchestrator like kubernetes.
 
-In fact there's demo config for Micro on Kubernetes. Check out the repo at [github.com/micro/kubernetes](https://github.com/micro/kubernetes)
-
-## What's the difference between API, Web and SRV services?
-
-<img src="images/arch.png" />
-
-As part of the micro toolkit we attempt to define a set of design patterns for a scalable architecture by separating the concerns of the API, Web dashboards and backend services (SRV).
-
-### API Services
-
-API services are a separate tier of services for serving your http/json API. This might be a public facing api or leveraged by your clients. API services 
-are served by the `micro api` and conform to an api gateway pattern. They are written as standard Go Micro services but use the namespace 
-`go.micro.api` to logically separate themselves.
-
-### Web Services
-
-Web services are served by the micro web with the default namespace go.micro.web. We believe in web apps as first class citizens in the microservice world therefor building web dashboards as microservices. The micro web is a reverse proxy and will forward HTTP requests to the appropriate web apps based on path to service resolution. 
-
-Learn more about it [here](https://github.com/micro/micro/tree/master/web)
-
-### SRV services
-
-SRV services are basically standard RPC services, the usual kind of service you would write. We usually call them RPC or backend services as they should mainly be part of the backend architecture and never be public facing. By default we use the namespace go.micro.srv for these but you should use your domain com.example.srv. 
+As mentioned we run a platform [m3o.com](https://m3o.com) which offers Micro as a Service. If you need hosting head there.
 
 ## How performant is it?
 
-Performance is not a current focus of Micro but always something we strive for. We let the wider Go ecosystem handle 
-the heavy lifting and focus on developer productivity first. This means we're using gRPC beneath the covers and NATS 
-for messaging.
-
-Where the default plugins are not performant enough you can use [go-plugins](https://github.com/micro/go-plugins) to 
-switch out to your tool of choice.
+Micro makes use of gRPC so it's about as performant as that. Micro also load balances between multiple instances of services 
+and can offload to distributed systems infrastructure where scaling is necessary.
 
 ## Does Micro support gRPC?
 
-Yes. In v2 micro makes use of gRPC by default.
+Yes. In v2 and beyond micro makes use of gRPC by default.
 
 ## Micro vs Go-Kit
 
@@ -128,21 +71,12 @@ Go-kit describes itself as a standard library for microservices. Like Go, go-kit
 which can be used to construct your applications. Go-kit is great where you want complete control over how you define 
 your services.
 
-Go Micro is a pluggable RPC framework for microservices. It's an opinionated framework which attempts to simplify 
-the communication aspects of distributed systems so you can focus on the business logic itself. Go-micro is great 
-where you want to get up and running quickly while having something pluggable to switch out infrastructure without 
-code changes.
-
-Micro is a microservice toolkit. It's like a swiss army knife for microservices which builds on go-micro to provide 
-traditional entry points like http api gateway, web ui, cli, slack bot, etc. Micro uses tooling to guide the logical 
-separation of concerns in your architecture, pushing you to create an API layer of microservices for a public API and 
-separately creating a WEB layer of microservices for web UIs.
-
-Use go-kit where you want complete control. Use go-micro where you want an opinionated framework.
+Go Micro is also a standard library for microservices so if you're looking to choose the best abstractions for the job 
+check that out. Otherwise Micro is a framework for microservices, encapsulating all the requirements for backend 
+and API development. Think of it like a platform.
 
 ## Where Can I Learn More?
 
-- Join the slack community - [micro.mu/slack](https://slack.m3o.com)
-- Read the blog - [micro.mu/blog](https://micro.mu/blog)
+Check out [Awesome Micro](https://github.com/micro/awesome-micro) for more resources.
 
 {% include docs/links.html %}
